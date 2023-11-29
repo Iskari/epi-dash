@@ -1,11 +1,9 @@
 export default class Customer {
-  customer_no: int
+  customer_no: number
   name: string
 
   constructor(payload: any) {
-    if (payload) {
-      this.customer_no = payload.customer_no || -1
-      this.name = payload.name || 'Unknown'
-    }
+    this.customer_no = payload.customer_no || -1
+    this.name = payload.name || 'Unknown'
   }
 }

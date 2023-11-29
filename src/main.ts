@@ -23,7 +23,7 @@ if (window.Worker) {
   worker.onmessage = (e) => {
     switch (e.data.type) {
       case 'addOrCreateOrder':
-        state.orders.addOrUpdateOrder(e.data.order)
+        state.orders.addOrUpdateOrder(structuredClone(e.data.order))
         break
       case 'error':
       default:

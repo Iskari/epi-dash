@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import useTimeaxisUnits from '../composables/useTimeaxisUnits'
 import useTimePositionMapping from '../composables/useTimePositionMapping'
-import moment from 'moment'
 import { ref } from 'vue'
 
 const { timeaxisUnits } = useTimeaxisUnits()
@@ -31,7 +30,7 @@ const { mapTimeToPosition } = useTimePositionMapping()
 const timeOffset = ref(0)
 
 const updatePosition = () => {
-  timeOffset.value = mapTimeToPosition(moment())
+  timeOffset.value = mapTimeToPosition(new Date())
 }
 
 setInterval(updatePosition, 5000)

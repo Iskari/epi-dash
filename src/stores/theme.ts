@@ -2,7 +2,6 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { useStorage as useLocalStorage } from '@vueuse/core'
 
 export const useStore = defineStore('theme', {
-  id: 'theme',
   state: () => {
     return {
       darkMode: useLocalStorage(

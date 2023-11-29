@@ -8,8 +8,6 @@ const state = useStore()
 
 <template>
   <order-time-table
-    chart-start="2023-07-12 12:00"
-    chart-end="2023-07-12 12:00"
     bar-start="myBeginDate"
     bar-end="myEndDate"
   >

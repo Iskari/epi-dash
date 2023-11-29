@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { Settings, SunLight, HalfMoon } from '@iconoir/vue'
-import LogoSVG from './assets/logo.svg?component'
+import LogoSVG from './assets/logo.svg'
 import { useStore } from './stores/global'
 
 const state = useStore()

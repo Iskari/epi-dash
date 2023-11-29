@@ -15,7 +15,7 @@
     "@iconoir/vue": "^7.0.0",
     "@vueuse/core": "^10.5.0",
     "axios": "^1.6.2",
-    "moment": "^2.29.4",
+    "dayjs": "^1.11.10",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"

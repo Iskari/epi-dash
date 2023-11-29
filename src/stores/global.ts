@@ -3,7 +3,6 @@ import { useStore as useThemeStore } from './theme'
 import { useStore as useOrderStore } from './order'
 
 export const useStore = defineStore('global', {
-  id: 'global',
   state: () => {
     return {
       theme: useThemeStore(),

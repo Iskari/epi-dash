@@ -1,21 +1,18 @@
-import type { GGanttChartConfig } from '../components/GGanttChart.vue'
 import { computed } from 'vue'
 
-import moment from 'moment'
+import dayjs from 'dayjs'
 import provideConfig from '../provider/provideConfig.js'
 
-export default function useTimePositionMapping(config: GGanttChartConfig = provideConfig()) {
-  const { chartSize } = config
-  const chartStartMoment = moment().startOf('day').subtract(1, 'day')
-  const chartEndMoment = moment().startOf('day').add(10, 'day')
+export default function useTimePositionMapping(config = provideConfig()) {
+  const { chartSize, chartStart, chartEnd } = config
 
   const totalNumOfMinutes = computed(() => {
-    return chartEndMoment.diff(chartStartMoment, 'minutes')
+    return dayjs(chartEnd.value).diff(chartStart.value, 'minutes')
   })
 
-  const mapTimeToPosition = (time: moment) => {
+  const mapTimeToPosition = (time: Date | null) : number => {
     const width = chartSize.width.value || 0
-    const diffFromStart = time.diff(chartStartMoment, 'minutes')
+    const diffFromStart = dayjs(time).diff(chartStart.value, 'minutes')
     return Math.ceil((diffFromStart / totalNumOfMinutes.value) * width)
   }
 

@@ -2,8 +2,8 @@
   <div
     class="flex overflow-hidden rounded items-center"
     :class="{
-      'bg-orange-300': props.schedule == 'dispo',
-      'bg-lime-300': props.schedule == 'event'
+      'bg-orange-300': props.scheduleType == 'dispo',
+      'bg-lime-300': props.scheduleType == 'event'
     }"
     :style="{
       position: 'absolute',
@@ -15,7 +15,7 @@
   >
     <div class="w-full h-full box-border flex items-center m-1">
       <div>
-        {{ props.schedule == 'dispo' ? 'D' : 'E' }}
+        {{ props.scheduleType == 'dispo' ? 'D' : 'E' }}
       </div>
     </div>
   </div>
@@ -27,10 +27,12 @@ import { ref, watch, onMounted } from 'vue'
 import useTimePositionMapping from '../composables/useTimePositionMapping.js'
 import provideConfig from '../provider/provideConfig.js'
 import Order from '../models/Order'
+import TimeSpan from '../models/TimeSpan'
 
 const props = defineProps<{
-  order: Order
-  schedule: string
+  order: Order,
+  timeSpan: TimeSpan,
+  scheduleType: string
 }>()
 
 const config = provideConfig()
@@ -45,10 +47,10 @@ const xEnd = ref(0)
 
 onMounted(() => {
   watch(
-    [props.order, chartStart, chartEnd, chartSize.width],
+    [props.timeSpan.start, props.timeSpan.end, chartStart, chartEnd, chartSize.width],
     () => {
-      ;(xStart.value = mapTimeToPosition(props.order[props.schedule].start)),
-        (xEnd.value = mapTimeToPosition(props.order[props.schedule].end))
+      ;(xStart.value = mapTimeToPosition(props.timeSpan.start)),
+        (xEnd.value = mapTimeToPosition(props.timeSpan.end))
     },
     { deep: true, immediate: true }
   )

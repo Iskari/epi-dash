@@ -7,17 +7,19 @@
       {{ order.name }}
     </div>
     <div class="w-screen relative" v-bind="$attrs">
-      <order-time-table-schedule :order="props.order" schedule="dispo" />
-      <order-time-table-schedule :order="props.order" schedule="event" />
+      <order-time-table-schedule :order="props.order" :time-span="props.order.dispo" schedule-type="dispo" />
+      <order-time-table-schedule :order="props.order" :time-span="props.order.event" schedule-type="event" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import OrderTimeTableSchedule from './OrderTimeTableSchedule.vue'
-import Order from '../models/order'
+import Order from '../models/Order'
 
 const props = defineProps<{
   order: Order
 }>()
+
+console.log(props);
 </script>

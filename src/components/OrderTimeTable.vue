@@ -17,6 +17,8 @@ import {
   toRefs
 } from 'vue'
 
+import dayjs from 'dayjs';
+
 import TimeTableTimeaxis from './TimeTableTimeaxis.vue'
 import TimeTableGrid from './TimeTableGrid.vue'
 
@@ -24,9 +26,7 @@ import { useElementSize } from '@vueuse/core'
 import { CONFIG_KEY } from '../provider/symbols.js'
 
 export interface GGanttChartProps {
-  chartStart: string | Date
-  chartEnd: string | Date
-  dateFormat?: string | false
+  dateFormat?: string | false,
   rowHeight?: number
 }
 
@@ -40,6 +40,8 @@ const chartSize = useElementSize(ganttChart)
 
 provide(CONFIG_KEY, {
   ...toRefs(props),
+  chartStart: ref(dayjs().startOf('day').subtract(1, 'day').toDate()),
+  chartEnd: ref(dayjs().startOf('day').add(10, 'day').toDate()),
   chartSize
 })
 </script>
