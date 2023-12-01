@@ -4,7 +4,7 @@
       <div
         v-for="{ label, width } in timeaxisUnits.upperUnits"
         :key="label"
-        class="flex-1 text-center"
+        class="flex-1 text-center dark:text-gray-400"
         :style="{
           'flex-basis': width
         }"

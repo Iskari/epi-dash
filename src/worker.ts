@@ -22,8 +22,6 @@ async function fetchOrders() {
         ia: false, // is archived
         icv: true, // is current version
         dtt: 0, // Select Dispo as start date for filter
-        ds: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT), // Filter start date to yesterday
-        de: dayjs().add(12, 'd').format(ISO_DATE_FORMAT) // Filter end date to 10 days from now
       },
       headers: {
         //'If-Modified-Since': dayjs(lastUpdate).format("ddd, DD MMM YYYY HH:mm:ss GMT"), // Cannot use since required headers not whitelisted
@@ -40,15 +38,18 @@ async function fetchOrders() {
 }
 
 function parseOrders(apiResponse: any) {
+  let displayStartDate = dayjs().startOf('d').subtract(1, 'd').toDate()
+  let displayEndDate = dayjs().endOf('d').add(10, 'd').toDate()
   if (apiResponse.data.success) {
     for (const orderData of apiResponse.data.payload) {
       try {
         const order = new Order(orderData)
-        // TODO: Filter Orders
-        self.postMessage({
-          type: 'addOrCreateOrder',
-          order: order
-        })
+        if (!order.dispo || !order.event || displayStartDate < order.dispo.end && order.dispo.start < displayEndDate) {
+          self.postMessage({
+            type: 'addOrCreateOrder',
+            order: order
+          })
+        }
       } catch (e) {
         self.postMessage({
           type: 'error',

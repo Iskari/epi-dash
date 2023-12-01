@@ -11,14 +11,14 @@ export const useStore = defineStore('orders', {
   getters: {
     sortedOrders: (state) => {
       const result = Array.from(state.orders.values()).sort((left, right) => {
-        if(left.dispo !== null) {
-          if(right.dispo !== null) {
+        if (left.dispo !== null) {
+          if (right.dispo !== null) {
             return dayjs(left.dispo.end).diff(right.dispo.end)
           } else {
-            return 1;
+            return 1
           }
         }
-        return -1;
+        return -1
       })
       return result
     }

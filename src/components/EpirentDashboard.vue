@@ -7,10 +7,7 @@ const state = useStore()
 </script>
 
 <template>
-  <order-time-table
-    bar-start="myBeginDate"
-    bar-end="myEndDate"
-  >
+  <order-time-table bar-start="myBeginDate" bar-end="myEndDate">
     <order-time-table-row
       v-for="order in state.orders.sortedOrders"
       :order="order"

@@ -13,11 +13,7 @@
       height: `${rowHeight * 0.8}px`
     }"
   >
-    <div class="w-full h-full box-border flex items-center m-1">
-      <div>
-        {{ props.scheduleType == 'dispo' ? 'D' : 'E' }}
-      </div>
-    </div>
+    <div class="w-full h-full box-border flex items-center m-1"></div>
   </div>
 </template>
 
@@ -30,8 +26,8 @@ import Order from '../models/Order'
 import TimeSpan from '../models/TimeSpan'
 
 const props = defineProps<{
-  order: Order,
-  timeSpan: TimeSpan,
+  order: Order
+  timeSpan: TimeSpan | null
   scheduleType: string
 }>()
 
@@ -46,13 +42,17 @@ const xStart = ref(0)
 const xEnd = ref(0)
 
 onMounted(() => {
-  watch(
-    [props.timeSpan.start, props.timeSpan.end, chartStart, chartEnd, chartSize.width],
-    () => {
-      ;(xStart.value = mapTimeToPosition(props.timeSpan.start)),
-        (xEnd.value = mapTimeToPosition(props.timeSpan.end))
-    },
-    { deep: true, immediate: true }
-  )
+  if(props.order.has_error === false) {
+    watch(
+      [props.order, chartStart, chartEnd, chartSize.width],
+      () => {
+        if(props.timeSpan !== null) {
+          ;(xStart.value = mapTimeToPosition(props.timeSpan.start)),
+          (xEnd.value = mapTimeToPosition(props.timeSpan.end))
+        } 
+      },
+      { deep: true, immediate: true }
+    )
+  }
 })
 </script>
