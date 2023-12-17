@@ -1,29 +1,29 @@
 import { computed } from 'vue'
 
 import dayjs from 'dayjs'
-import provideConfig from '../provider/provideConfig'
+import { useStore } from '../stores/global'
 
-export default function useTimeaxisUnits(config = provideConfig()) {
-  const { chartStart, chartEnd } = config
-
+export default function useTimeaxisUnits(store = useStore()) {
   const timeaxisUnits = computed(() => {
     const upperUnits: { label: string; value?: string; date: Date; width?: number }[] = []
     const lowerUnits: { label: string; value?: string; date: Date; width?: number }[] = []
 
-    const completeWidth = dayjs(chartStart.value).diff(chartEnd.value, 'minutes')
-    for (let i = 0; i < 11; i++) {
-      const labelDay = dayjs(chartStart.value).add(i, 'day')
+    const numOfDaysInChart = dayjs(store.config.end).diff(store.config.start, 'd')
+    const completeWidth = dayjs(store.config.start).diff(store.config.end, 'minutes')
+
+    for (let i = 0; i < numOfDaysInChart; i++) {
+      const labelDay = dayjs(store.config.start).add(i, 'day')
 
       upperUnits.push({
-        label: labelDay.format('DD.MMM'),
+        label: labelDay.format('dd DD.MMM'),
         value: 'day',
         date: labelDay.toDate(),
         width: (completeWidth / 1440) * 100
       })
     }
 
-    for (let i = 0; i < 22; i++) {
-      const labelHour = dayjs(chartStart.value).add(i * 12, 'hour')
+    for (let i = 0; i < numOfDaysInChart * 2; i++) {
+      const labelHour = dayjs(store.config.start).add(i * 12, 'hour')
 
       lowerUnits.push({
         label: labelHour.format('HH'),

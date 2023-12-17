@@ -1,16 +1,18 @@
 <template>
   <div
-    class="flex overflow-hidden rounded items-center"
+    class="flex overflow-hidden rounded items-center z-20"
     :class="{
-      'bg-orange-300': props.scheduleType == 'dispo',
-      'bg-lime-300': props.scheduleType == 'event'
+      'bg-sky-400': props.schedule.type == ScheduleType.Dispo,
+      'bg-green-400': props.schedule.type == ScheduleType.Event,
+      'bg-purple-400': props.schedule.type == ScheduleType.Sale,
+      'bg-red-400': props.schedule.type == ScheduleType.Unknown
     }"
     :style="{
       position: 'absolute',
-      top: `${rowHeight * 0.1}px`,
+      top: `${store.chart.rowHeight * 0.1}px`,
       left: `${xStart}px`,
       width: `${xEnd - xStart}px`,
-      height: `${rowHeight * 0.8}px`
+      height: `${store.chart.rowHeight * 0.8}px`
     }"
   >
     <div class="w-full h-full box-border flex items-center m-1"></div>
@@ -21,38 +23,29 @@
 import { ref, watch, onMounted } from 'vue'
 
 import useTimePositionMapping from '../composables/useTimePositionMapping.js'
-import provideConfig from '../provider/provideConfig.js'
+import { useStore } from '../stores/global'
 import Order from '../models/Order'
-import TimeSpan from '../models/TimeSpan'
+import Schedule from '../models/Schedule'
+import ScheduleType from '../models/ScheduleType'
 
-const props = defineProps<{
-  order: Order
-  timeSpan: TimeSpan | null
-  scheduleType: string
-}>()
-
-const config = provideConfig()
-const { rowHeight } = config
-
+const store = useStore()
 const { mapTimeToPosition } = useTimePositionMapping()
 
-const { chartStart, chartEnd, chartSize } = config
+const props = defineProps<{
+  schedule: Schedule
+}>()
 
 const xStart = ref(0)
 const xEnd = ref(0)
 
 onMounted(() => {
-  if(props.order.has_error === false) {
-    watch(
-      [props.order, chartStart, chartEnd, chartSize.width],
-      () => {
-        if(props.timeSpan !== null) {
-          ;(xStart.value = mapTimeToPosition(props.timeSpan.start)),
-          (xEnd.value = mapTimeToPosition(props.timeSpan.end))
-        } 
-      },
-      { deep: true, immediate: true }
-    )
-  }
+  watch(
+    [props.schedule, store.chart.size.width, store.chart.size.height],
+    () => {
+      xStart.value = mapTimeToPosition(props.schedule.start)
+      xEnd.value = mapTimeToPosition(props.schedule.end)
+    },
+    { deep: true, immediate: true }
+  )
 })
 </script>

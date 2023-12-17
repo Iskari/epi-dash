@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full top-0 left-0 justify-between flex divide-x divide-dashed absolute">
+  <div class="w-full h-full top-0 left-0 justify-between flex divide-x-2 divide-dashed absolute">
     <div
       v-for="{ label, width } in timeaxisUnits.lowerUnits"
       :key="label"
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div
-    class="bg-red-500 w-px h-full absolute z-10"
+    class="bg-red-500 w-0.5 h-full absolute z-40"
     :style="{
       left: `${timeOffset}px`
     }"
@@ -23,16 +23,18 @@
 import useTimeaxisUnits from '../composables/useTimeaxisUnits'
 import useTimePositionMapping from '../composables/useTimePositionMapping'
 import { ref } from 'vue'
+import { useStore } from '../stores/global'
 
+const store = useStore()
 const { timeaxisUnits } = useTimeaxisUnits()
 const { mapTimeToPosition } = useTimePositionMapping()
 
 const timeOffset = ref(0)
 
-const updatePosition = () => {
+function updatePosition() {
   timeOffset.value = mapTimeToPosition(new Date())
 }
 
-setInterval(updatePosition, 5000)
 updatePosition()
+setInterval(updatePosition, store.config.updateInterval)
 </script>

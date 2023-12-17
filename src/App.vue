@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import { DashboardSpeed, ControlSlider, SunLight, HalfMoon } from '@iconoir/vue'
-import LogoUrl from './assets/Logo.png'
+import { DashboardSpeed, ControlSlider, SunLight, HalfMoon, IconoirProvider } from '@iconoir/vue'
+import LogoDark from './assets/logo-darkmode.png'
+import LogoLight from './assets/logo-lightmode.png'
 import { useStore } from './stores/global'
 
 const state = useStore()
@@ -17,8 +18,12 @@ const navOpen = ref(false)
     <header>
       <nav>
         <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="https://avivox.ch/" class="flex items-center bg-stone-900 p-2">
-            <img :src="LogoUrl" alt="Avivox Logo" class="h-8 mr-3" />
+          <a href="https://avivox.ch/" class="flex items-center p-2">
+            <img
+              :src="state.theme.darkMode ? LogoDark : LogoLight"
+              alt="Avivox Logo"
+              class="h-8 mr-3"
+            />
           </a>
           <button
             type="button"
@@ -62,7 +67,7 @@ const navOpen = ref(false)
                 >
                   <div class="flex w-full">
                     <DashboardSpeed />
-                    <span class="w-full md:hidden flex-1 pl-2"> Einstellungen </span>
+                    <span class="w-full md:hidden flex-1 pl-2">Dashboard</span>
                   </div>
                 </RouterLink>
               </li>
@@ -91,7 +96,7 @@ const navOpen = ref(false)
                 >
                   <div class="flex w-full">
                     <ControlSlider />
-                    <span class="w-full md:hidden flex-1 pl-2"> Einstellungen </span>
+                    <span class="w-full md:hidden flex-1 pl-2">Einstellungen</span>
                   </div>
                 </RouterLink>
               </li>

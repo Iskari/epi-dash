@@ -1,29 +1,21 @@
 <template>
   <div class="overflow-hidden h-10 relative w-screen">
     <div
-      class="absolute top-0 left-0 p-1 text-xs z-20 bg-gradient-to-r from-slate-200 dark:text-white dark:from-black flex flex-col"
-      :class="{
-        'bg-red-500': props.order.has_error
-      }"
+      class="absolute top-0 left-0 p-1 text-xs bg-gradient-to-r from-slate-200 dark:text-white dark:from-gray-900 flex z-30"
     >
-      <div class="inline-flex">
-        <b class="self-center">{{ order.order_no_formatted }}</b>
-        <delivery-truck class="self-center w-5 h-5 mx-1" v-if="order.is_self_pickup" />
+      <delivery-truck class="self-center w-5 h-5 mx-1" v-if="props.order.is_self_pickup" />
+      <select-face-3d class="self-center w-5 h-5 mx-1" v-else-if="props.order.is_sale" />
+      <clock-rotate-right class="self-center w-5 h-5 mx-1" v-else />
+      <div class="inline-flex flex-col">
+        <b>{{ props.order.order_no_formatted }}</b>
+        <span>{{ props.order.customer.name }} | {{ props.order.name }}</span>
       </div>
-      <span class="mx-0">
-        {{ order.name }}
-      </span>
     </div>
     <div class="w-screen relative">
       <order-time-table-schedule
-        :order="props.order"
-        :time-span="props.order.dispo"
-        schedule-type="dispo"
-      />
-      <order-time-table-schedule
-        :order="props.order"
-        :time-span="props.order.event"
-        schedule-type="event"
+        v-for="schedule in order.schedules"
+        :key="schedule.type"
+        :schedule="schedule"
       />
     </div>
   </div>
@@ -32,7 +24,7 @@
 <script setup lang="ts">
 import OrderTimeTableSchedule from './OrderTimeTableSchedule.vue'
 import Order from '../models/Order'
-import { DeliveryTruck } from '@iconoir/vue'
+import { DeliveryTruck, ClockRotateRight, SelectFace3d } from '@iconoir/vue'
 
 const props = defineProps<{
   order: Order

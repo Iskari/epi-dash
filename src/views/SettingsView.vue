@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import Settings from '../components/Settings.vue'
+</script>
+
 <template>
-  <div class="settings">
-    <h1 class="text-xl font-medium text-white">Die Einstellungen sind noch nicht fertig...</h1>
-  </div>
+  <main class="flex-1 h-100">
+    <Settings class="h-100" />
+  </main>
 </template>
