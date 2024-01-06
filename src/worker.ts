@@ -19,7 +19,8 @@ async function fetchOrders() {
       params: {
         cl: 0, // Select Mandant
         ia: false, // is archived
-        icv: true // is current version
+        icv: true, // is current version
+        ico: true // is confirmed
       }
     })
     .then(parseOrders)
