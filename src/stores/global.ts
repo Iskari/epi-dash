@@ -1,5 +1,4 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
-import { watch } from 'vue'
 import { useStore as useThemeStore } from './theme'
 import { useStore as useOrderStore } from './order'
 import { useStore as useChartStore } from './chart'

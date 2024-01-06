@@ -50,17 +50,13 @@ function parseOrders(apiResponse: any) {
           })
         }
       } catch (e) {
-        self.postMessage({
-          type: 'error',
-          message: `Der Epirent Server hat mit inkorrekten Daten geantwortet`,
-          error: e
-        })
+        console.error("Epirent responded with invalid Order", orderData);
       }
     }
   } else {
     self.postMessage({
       type: 'error',
-      message: `Der Epirent Server hat die Verbingun abgewiesen (ist der Api Schlüssel falsch?)`,
+      message: `Der Epirent Server hat die Verbinung abgewiesen (ist der Api Schlüssel falsch?)`,
       error: apiResponse
     })
   }
