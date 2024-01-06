@@ -15,10 +15,10 @@ export default class Schedule {
     this.start = dayjs(payload.date_start).add(payload.time_start, 's').toDate()
     this.end = dayjs(payload.date_end).add(payload.time_end, 's').toDate()
     this.type = mapToScheduleType(payload.type)
-    if(Object.keys(payload).length !== 0 && isNaN(this.start)) {
+    if(Object.keys(payload).length !== 0 && isNaN(this.start.getTime())) {
       throw new Error(`Start Date is invalid ${payload.date_start} ${payload.time_start}`);
     }
-    if(Object.keys(payload).length !== 0 && isNaN(this.end)) {
+    if(Object.keys(payload).length !== 0 && isNaN(this.end.getTime())) {
       throw new Error(`End Date is invalid ${payload.date_end} ${payload.time_end}`);
     }
   }
