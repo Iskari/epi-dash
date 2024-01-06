@@ -24,9 +24,12 @@ export const useStore = defineStore('chart', {
     is_loading: (state): boolean => {
       return state.isLoading
     },
-    size: (state) : ElementSize => {
-      return state._size
-    }
+    height: (state) : number => {
+      return state._size.height
+    },
+    width: (state) : number => {
+      return state._size.width
+    },
   },
   actions: {
     setChartDimensions(chart: Ref<HTMLElement | null>): void {

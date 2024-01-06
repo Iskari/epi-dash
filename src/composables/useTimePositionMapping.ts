@@ -9,7 +9,7 @@ export default function useTimePositionMapping(state = useStore()) {
   })
 
   const mapTimeToPosition = (time: Date | null): number => {
-    const width = state.chart.size.width || 0
+    const width = state.chart.width || 0
     const diffFromStart = dayjs(time).diff(state.config.start, 'minutes')
     const result = Math.ceil((diffFromStart / totalNumOfMinutes.value) * width)
     return result

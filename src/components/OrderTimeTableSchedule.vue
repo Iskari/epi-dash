@@ -9,10 +9,10 @@
     }"
     :style="{
       position: 'absolute',
-      top: `${store.chart.rowHeight * 0.1}px`,
+      top: `${store.rowHeight * 0.1}px`,
       left: `${xStart}px`,
       width: `${xEnd - xStart}px`,
-      height: `${store.chart.rowHeight * 0.8}px`
+      height: `${store.rowHeight * 0.8}px`
     }"
   >
     <div class="w-full h-full box-border flex items-center m-1"></div>
@@ -21,14 +21,14 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-
+import { storeToRefs } from 'pinia'
 import useTimePositionMapping from '../composables/useTimePositionMapping.js'
-import { useStore } from '../stores/global'
-import Order from '../models/Order'
+import { useStore } from '../stores/chart'
 import Schedule from '../models/Schedule'
 import ScheduleType from '../models/ScheduleType'
 
 const store = useStore()
+const reactiveStore = storeToRefs(store);
 const { mapTimeToPosition } = useTimePositionMapping()
 
 const props = defineProps<{
@@ -40,7 +40,7 @@ const xEnd = ref(0)
 
 onMounted(() => {
   watch(
-    [props.schedule, store.chart.size.width, store.chart.size.height],
+    [props.schedule, reactiveStore.width, reactiveStore.height],
     () => {
       xStart.value = mapTimeToPosition(props.schedule.start)
       xEnd.value = mapTimeToPosition(props.schedule.end)
