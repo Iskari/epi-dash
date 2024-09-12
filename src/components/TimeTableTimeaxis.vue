@@ -1,6 +1,6 @@
 <template>
-  <div class="border-b-2 sticky top-0 bg-gray-50 dark:bg-gray-900 z-50">
-    <div class="flex divide-x-2">
+  <div class="border-b-2 dark:border-b sticky top-0 bg-gray-50 dark:bg-gray-900 z-50">
+    <div class="flex divide-x-2 dark:divide-x">
       <div
         v-for="{ label, width } in timeaxisUnits.upperUnits"
         :key="label"
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <div class="flex divide-x-2">
+    <div class="flex divide-x-2 dark:divide-x">
       <div
         v-for="{ label, width } in timeaxisUnits.lowerUnits"
         :key="label"

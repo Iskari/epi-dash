@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-full top-0 left-0 justify-between flex divide-x-2 divide-dashed absolute">
+  <div
+    class="w-full h-full top-0 left-0 justify-between flex divide-x-2 divide-dashed dark:divide-x absolute"
+  >
     <div
       v-for="{ label, width } in timeaxisUnits.lowerUnits"
       :key="label"

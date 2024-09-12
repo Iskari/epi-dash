@@ -3,7 +3,7 @@
     <time-table-timeaxis />
     <div class="relative flex-1">
       <time-table-grid />
-      <div class="divide-y-2 divide-dashed">
+      <div class="divide-y-2 divide-dashed dark:divide-y">
         <slot />
       </div>
     </div>

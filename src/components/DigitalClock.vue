@@ -1,5 +1,5 @@
 <template>
-  <div class="clock">
+  <div class="dark:text-white">
     {{ datetime }}
   </div>
 </template>
