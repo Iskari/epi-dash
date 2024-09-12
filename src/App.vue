@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import DigitalClock from './components/DigitalClock.vue'
 import { DashboardSpeed, ControlSlider, SunLight, HalfMoon, IconoirProvider } from '@iconoir/vue'
 import LogoDark from './assets/logo-darkmode.png'
 import LogoLight from './assets/logo-lightmode.png'
@@ -25,6 +26,7 @@ const navOpen = ref(false)
               class="h-8 mr-3"
             />
           </a>
+          <digital-clock />
           <button
             type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
