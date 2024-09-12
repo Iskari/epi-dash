@@ -4,10 +4,7 @@ import { useStorage as useLocalStorage } from '@vueuse/core'
 export const useStore = defineStore('theme', {
   state: () => {
     return {
-      darkMode: useLocalStorage(
-        'darkMode',
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      )
+      darkMode: useLocalStorage('darkMode', true)
     }
   },
   actions: {
