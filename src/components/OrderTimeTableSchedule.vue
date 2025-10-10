@@ -28,7 +28,7 @@ import Schedule from '../models/Schedule'
 import ScheduleType from '../models/ScheduleType'
 
 const store = useStore()
-const reactiveStore = storeToRefs(store);
+const reactiveStore = storeToRefs(store)
 const { mapTimeToPosition } = useTimePositionMapping()
 
 const props = defineProps<{

@@ -20,7 +20,10 @@ onUnmounted(() => {
 <template>
   <dashboard-error v-if="state.has_error"></dashboard-error>
   <div v-else-if="state.chart.is_loading" role="status" class="flex h-full">
-    <refresh-double aria-hidden="true" class="w-20 h-20 text-gray-400 animate-spin dark:text-gray-600 m-auto"/>
+    <refresh-double
+      aria-hidden="true"
+      class="w-20 h-20 text-gray-400 animate-spin dark:text-gray-600 m-auto"
+    />
     <span class="sr-only">Loading...</span>
   </div>
 

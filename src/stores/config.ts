@@ -27,7 +27,7 @@ export const useStore = defineStore('config', {
     },
     sortByType: (state) => {
       return state._sortByType || ScheduleType.Dispo
-    },
+    }
   },
   actions: {
     toggleSaleElements() {

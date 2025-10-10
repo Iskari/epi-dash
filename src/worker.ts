@@ -50,7 +50,7 @@ function parseOrders(apiResponse: any) {
           })
         }
       } catch (e) {
-        console.error("Epirent responded with invalid Order", orderData);
+        console.error('Epirent responded with invalid Order', orderData)
       }
     }
   } else {

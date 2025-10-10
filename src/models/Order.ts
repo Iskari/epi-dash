@@ -84,13 +84,13 @@ export default class Order {
   public is_after(other: Order, compareType: ScheduleType): boolean {
     const this_schedule = this.firstScheduleOfType(compareType)
     const other_schedule = other.firstScheduleOfType(compareType)
-    const this_schedule_end = (this_schedule) ? this_schedule.end : 0
-    const other_schedule_end = (other_schedule) ? other_schedule.end : 0
+    const this_schedule_end = this_schedule ? this_schedule.end : 0
+    const other_schedule_end = other_schedule ? other_schedule.end : 0
     return this_schedule_end > other_schedule_end
   }
 
-  public has_passed() : boolean {
+  public has_passed(): boolean {
     const schedule = this.firstScheduleOfType(ScheduleType.Event)
-    return (schedule) ? schedule.end < new Date () : false
+    return schedule ? schedule.end < new Date() : false
   }
 }

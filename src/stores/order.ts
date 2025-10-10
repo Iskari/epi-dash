@@ -1,7 +1,6 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import Order from '../models/Order'
 import ScheduleType from '../models/ScheduleType'
-import dayjs from 'dayjs'
 import { useStore as useConfigStore } from './config'
 
 export const useStore = defineStore('orders', {
@@ -58,20 +57,25 @@ function sortShortTimeEvents(left: Order, right: Order): number {
   const left_has_passed = left.has_passed()
   const right_has_passed = right.has_passed()
 
-  return + (
+  const sort_top = +(
     (left_has_passed && !right_has_passed && !(!left_has_passed || right_has_passed)) ||
     (is_after && !(left_has_passed || right_has_passed))
   )
+
+  if (sort_top) {
+    return 1
+  }
+  return -1
 }
 
 function getSimpleOrderSorter(type: ScheduleType) {
-  return (left: Order, right: Order) : number => {
+  return (left: Order, right: Order): number => {
     if (!left.firstScheduleOfType && !right.firstScheduleOfType) {
       return 0
     }
-    const left_schedule = left.firstScheduleOfType(type) || {end: 0}
-    const right_schedule = right.firstScheduleOfType(type) || {end: 0}
-    return (left_schedule.end > right_schedule.end) ? 1 : -1
+    const left_schedule = left.firstScheduleOfType(type) || { end: 0 }
+    const right_schedule = right.firstScheduleOfType(type) || { end: 0 }
+    return left_schedule.end > right_schedule.end ? 1 : -1
   }
 }
 

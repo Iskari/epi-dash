@@ -7,7 +7,7 @@ import { watch } from 'vue'
 import dayjs from 'dayjs'
 
 interface ElementSize {
-  width: number,
+  width: number
   height: number
 }
 
@@ -16,7 +16,7 @@ export const useStore = defineStore('chart', {
     return {
       updateInterval: 5000,
       rowHeight: 40,
-      _size: {width: 0, height: 0} as ElementSize,
+      _size: { width: 0, height: 0 } as ElementSize,
       isLoading: false
     }
   },
@@ -24,12 +24,12 @@ export const useStore = defineStore('chart', {
     is_loading: (state): boolean => {
       return state.isLoading
     },
-    height: (state) : number => {
+    height: (state): number => {
       return state._size.height
     },
-    width: (state) : number => {
+    width: (state): number => {
       return state._size.width
-    },
+    }
   },
   actions: {
     setChartDimensions(chart: Ref<HTMLElement | null>): void {
