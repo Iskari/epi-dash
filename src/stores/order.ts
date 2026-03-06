@@ -57,15 +57,15 @@ function sortShortTimeEvents(left: Order, right: Order): number {
   const left_has_passed = left.has_passed()
   const right_has_passed = right.has_passed()
 
-  const sort_top = +(
-    (left_has_passed && !right_has_passed && !(!left_has_passed || right_has_passed)) ||
-    (is_after && !(left_has_passed || right_has_passed))
-  )
-
-  if (sort_top) {
-    return 1
+  if (left_has_passed && !right_has_passed) {
+    return 1;
+  } else if(!left_has_passed && right_has_passed) {
+    return -1;
+  } else if(is_after) {
+    return 1;
+  } else {
+    return -1;
   }
-  return -1
 }
 
 function getSimpleOrderSorter(type: ScheduleType) {

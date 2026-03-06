@@ -1,4 +1,5 @@
 import Customer from './Customer'
+import Company from './Company'
 import Schedule from './Schedule'
 import ScheduleType from './ScheduleType'
 
@@ -14,6 +15,7 @@ export default class Order {
   is_sale: boolean
   is_rent: boolean
   customer: Customer
+  company: Company
 
   constructor(payload: any) {
     this.is_sale = payload.is_sale
@@ -23,6 +25,11 @@ export default class Order {
     this.name = payload.event || 'Unknown'
     this.is_self_pickup = payload.is_self_pickup
     this.customer = new Customer(payload.contact)
+    try {
+    this.company = new Company(payload.client_id)
+    } catch(e) {
+      console.log(e);
+    }
     this.schedules = []
 
     if (this.is_sale) {
@@ -62,6 +69,7 @@ export default class Order {
     const order = Object.assign(new Order({ is_sale: false, is_rent: false }), orderData)
     order.schedules = order.schedules.map((schedule) => Schedule.restore(schedule))
     order.customer = Customer.restore(order.customer)
+    order.company = Company.restore(order.company)
     return order
   }
 

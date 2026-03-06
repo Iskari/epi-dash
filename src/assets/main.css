@@ -1,5 +1,17 @@
-@import './tailwind.css';
+@import "tailwindcss";
 
 body * {
   @apply transition-colors duration-200;
 }
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));

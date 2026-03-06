@@ -29,7 +29,7 @@ const navOpen = ref(false)
           <digital-clock />
           <button
             type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-hidden focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
             aria-controls="navbar-default"
             :aria-expanded="navOpen"
             @click="navOpen = !navOpen"
@@ -64,42 +64,36 @@ const navOpen = ref(false)
               <li>
                 <RouterLink
                   to="/"
-                  class="block py-2 pl-3 pr-4 text-gray-900 rounded md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
+                  class="block py-2 pl-3 pr-4 text-gray-900 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                   aria-current="page"
                 >
-                  <div class="flex w-full">
-                    <DashboardSpeed />
-                    <span class="w-full md:hidden flex-1 pl-2">Dashboard</span>
-                  </div>
+                  <DashboardSpeed class=" text-gray-900 dark:text-gray-400 md:hover:text-blue-700"  />
+                  <span class="w-full md:hidden flex-1 pl-2">Dashboard</span>
                 </RouterLink>
               </li>
               <li>
                 <button
                   @click="state.theme.toggleDarkMode()"
-                  class="w-full block py-2 pl-3 pr-4 text-gray-900 rounded md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
+                  class="w-full block py-2 pl-3 pr-4 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                 >
-                  <div class="flex w-full">
-                    <SunLight v-if="state.theme.darkMode" />
-                    <HalfMoon v-else />
-                    <span class="w-full md:hidden flex-1 text-left pl-2">
-                      {{
-                        state.theme.darkMode
-                          ? 'Helle Darstellung aktivieren'
-                          : 'Dunkle Darstellung aktivieren'
-                      }}
-                    </span>
-                  </div>
+                  <SunLight class="dark:text-gray-400 md:hover:text-blue-700" v-if="state.theme.darkMode" />
+                  <HalfMoon class=" dark:text-gray-400 md:hover:text-blue-700" v-else />
+                  <span class="w-full md:hidden flex-1 text-left pl-2">
+                    {{
+                      state.theme.darkMode
+                        ? 'Helle Darstellung aktivieren'
+                        : 'Dunkle Darstellung aktivieren'
+                    }}
+                  </span>
                 </button>
               </li>
               <li>
                 <RouterLink
                   to="/settings"
-                  class="w-full block py-2 pl-3 pr-4 text-gray-900 rounded md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
+                  class="w-full block py-2 pl-3 pr-4 text-gray-900 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                 >
-                  <div class="flex w-full">
-                    <ControlSlider />
-                    <span class="w-full md:hidden flex-1 pl-2">Einstellungen</span>
-                  </div>
+                  <ControlSlider class=" dark:text-gray-400 md:hover:text-blue-700" />
+                  <span class="w-full md:hidden flex-1 pl-2">Einstellungen</span>
                 </RouterLink>
               </li>
             </ul>
@@ -112,8 +106,10 @@ const navOpen = ref(false)
   </div>
 </template>
 
-<style lang="scss" scoped>
-.router-link-active {
+<style lang="css" scoped>
+@import 'tailwindcss';
+
+.router-link-active svg {
   @apply md:text-blue-600 bg-blue-600 md:bg-transparent text-white;
 }
 </style>

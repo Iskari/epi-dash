@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex overflow-hidden rounded items-center z-20"
+    class="flex overflow-hidden rounded-sm items-center z-20"
     :class="{
       'bg-sky-400': props.schedule.type == ScheduleType.Dispo,
       'bg-green-400': props.schedule.type == ScheduleType.Event,

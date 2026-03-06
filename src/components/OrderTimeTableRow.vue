@@ -1,11 +1,13 @@
 <template>
-  <div class="overflow-hidden h-10 relative w-screen">
+  <div :class="['overflow-hidden', 'h-10', 'relative', 'w-screen', props.order.company.color+'/50']">
     <div
-      class="absolute top-0 left-0 p-1 text-xs bg-gradient-to-r from-slate-200 dark:text-white dark:from-gray-900 flex z-30"
+      class="absolute top-0 left-0 p-1 text-xs bg-linear-to-r from-slate-200 dark:text-white dark:from-gray-900 flex z-30"
     >
-      <delivery-truck class="self-center w-5 h-5 mx-1" v-if="props.order.is_self_pickup" />
-      <select-face-3d class="self-center w-5 h-5 mx-1" v-else-if="props.order.is_sale" />
-      <clock-rotate-right class="self-center w-5 h-5 mx-1" v-else />
+      <div :class="[props.order.company.color, 'flex', 'rounded', 'mr-1']">
+        <delivery-truck class="self-center w-5 h-5 mx-1" v-if="props.order.is_self_pickup" />
+        <select-face-3d class="self-center w-5 h-5 mx-1" v-else-if="props.order.is_sale" />
+        <clock-rotate-right class="self-center w-5 h-5 mx-1" v-else />
+      </div>
       <div class="inline-flex flex-col">
         <b>{{ props.order.order_no_formatted }}</b>
         <span>{{ props.order.customer.name }} | {{ props.order.name }}</span>
