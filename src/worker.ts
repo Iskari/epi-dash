@@ -14,24 +14,24 @@ api.defaults.headers.common['X-EPI-NO-SESSION'] = 'True'
 api.defaults.headers.post['Content-Type'] = 'application/json'
 
 async function fetchOrders() {
-  for(let c in [0, 2, 3]) {
+  for (let c in [0, 2, 3]) {
     api
-    .get(`${baseUrl}/v1/order/filter`, {
-      params: {
-        cl: c, // Select Mandant
-        ia: false, // is archived
-        icv: true, // is current version
-        ico: true // is confirmed
-      }
-    })
-    .then(parseOrders)
-    .catch((error) => {
-      self.postMessage({
-        type: 'error',
-        message: `Verbindungsfehler zum Epirent Server`,
-        error: error.code
+      .get(`${baseUrl}/v1/order/filter`, {
+        params: {
+          cl: c, // Select Mandant
+          ia: false, // is archived
+          icv: true, // is current version
+          ico: true // is confirmed
+        }
       })
-    });
+      .then(parseOrders)
+      .catch((error) => {
+        self.postMessage({
+          type: 'error',
+          message: `Verbindungsfehler zum Epirent Server`,
+          error: error.code
+        })
+      })
   }
 }
 

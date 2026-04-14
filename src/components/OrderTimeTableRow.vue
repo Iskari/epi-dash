@@ -1,5 +1,7 @@
 <template>
-  <div :class="['overflow-hidden', 'h-10', 'relative', 'w-screen', props.order.company.color+'/50']">
+  <div
+    :class="['overflow-hidden', 'h-10', 'relative', 'w-screen', props.order.company.tint]"
+  >
     <div
       class="absolute top-0 left-0 p-1 text-xs bg-linear-to-r from-slate-200 dark:text-white dark:from-gray-900 flex z-30"
     >

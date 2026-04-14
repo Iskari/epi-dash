@@ -15,7 +15,7 @@ export default class Order {
   is_sale: boolean
   is_rent: boolean
   customer: Customer
-  company: Company
+  company!: Company
 
   constructor(payload: any) {
     this.is_sale = payload.is_sale
@@ -26,9 +26,9 @@ export default class Order {
     this.is_self_pickup = payload.is_self_pickup
     this.customer = new Customer(payload.contact)
     try {
-    this.company = new Company(payload.client_id)
-    } catch(e) {
-      console.log(e);
+      this.company = new Company(payload.client_id)
+    } catch (e) {
+      console.log(e)
     }
     this.schedules = []
 
@@ -69,7 +69,7 @@ export default class Order {
     const order = Object.assign(new Order({ is_sale: false, is_rent: false }), orderData)
     order.schedules = order.schedules.map((schedule) => Schedule.restore(schedule))
     order.customer = Customer.restore(order.customer)
-    order.company = Company.restore(order.company)
+    order.company = Company.restore(orderData.company)
     return order
   }
 

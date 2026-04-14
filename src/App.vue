@@ -67,7 +67,7 @@ const navOpen = ref(false)
                   class="block py-2 pl-3 pr-4 text-gray-900 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                   aria-current="page"
                 >
-                  <DashboardSpeed class=" text-gray-900 dark:text-gray-400 md:hover:text-blue-700"  />
+                  <DashboardSpeed class="text-gray-900 dark:text-gray-400 md:hover:text-blue-700" />
                   <span class="w-full md:hidden flex-1 pl-2">Dashboard</span>
                 </RouterLink>
               </li>
@@ -76,8 +76,11 @@ const navOpen = ref(false)
                   @click="state.theme.toggleDarkMode()"
                   class="w-full block py-2 pl-3 pr-4 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                 >
-                  <SunLight class="dark:text-gray-400 md:hover:text-blue-700" v-if="state.theme.darkMode" />
-                  <HalfMoon class=" dark:text-gray-400 md:hover:text-blue-700" v-else />
+                  <SunLight
+                    class="dark:text-gray-400 md:hover:text-blue-700"
+                    v-if="state.theme.darkMode"
+                  />
+                  <HalfMoon class="dark:text-gray-400 md:hover:text-blue-700" v-else />
                   <span class="w-full md:hidden flex-1 text-left pl-2">
                     {{
                       state.theme.darkMode
@@ -92,7 +95,7 @@ const navOpen = ref(false)
                   to="/settings"
                   class="w-full block py-2 pl-3 pr-4 text-gray-900 rounded-sm md:hover:text-blue-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400"
                 >
-                  <ControlSlider class=" dark:text-gray-400 md:hover:text-blue-700" />
+                  <ControlSlider class="dark:text-gray-400 md:hover:text-blue-700" />
                   <span class="w-full md:hidden flex-1 pl-2">Einstellungen</span>
                 </RouterLink>
               </li>

@@ -58,13 +58,13 @@ function sortShortTimeEvents(left: Order, right: Order): number {
   const right_has_passed = right.has_passed()
 
   if (left_has_passed && !right_has_passed) {
-    return 1;
-  } else if(!left_has_passed && right_has_passed) {
-    return -1;
-  } else if(is_after) {
-    return 1;
+    return 1
+  } else if (!left_has_passed && right_has_passed) {
+    return -1
+  } else if (is_after) {
+    return 1
   } else {
-    return -1;
+    return -1
   }
 }
 
