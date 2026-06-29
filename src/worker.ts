@@ -45,7 +45,7 @@ function parseOrders(apiResponse: any) {
         const isInRange = order.schedules.find((schedule) => {
           return startDate < schedule.end && schedule.start < endDate
         })
-        if (isInRange) {
+        if (isInRange && !order.is_sale) {
           self.postMessage({
             type: 'addOrUpdateOrder',
             order: order
